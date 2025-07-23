@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(circle at top left, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 960px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 20px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar h1 {
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-add,
+    .btn-logout {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-add {
+      background: linear-gradient(to right, #667eea, #764ba2);
+    }
+
+    .btn-add:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .btn-logout {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      margin-left: 12px;
+    }
+
+    .btn-logout:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    }
+
+    .contact-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.01);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-info strong {
+      font-size: 18px;
+    }
+
+    .contact-info span {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .contact-info span.phone {
+      color: #a3e4f5;
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .contact-type {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #a0aec0;
+    }
+
+    .actions button {
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      margin-left: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: #6c5ce7;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>📞 Contact Manager</h1>
+    <div>
+      <a href="/add" class="btn-add">➕ Add Contact</a>
+      <a href="/logout" class="btn-logout">🔒 Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 style="margin-bottom: 20px;">Your Contacts</h2>
+    <% if (contacts.length === 0) { %>
+      <p>No contacts found.</p>
+    <% } else { %>
+      <% contacts.forEach(contact => { %>
+        <div class="contact-card">
+          <div class="contact-info">
+            <strong><%= contact.name %></strong>
+            <span>📧 <%= contact.email %></span>
+            <span class="phone">📱 <%= contact.phone %></span>
+            <span class="contact-type">🏷️ <%= contact.type %></span>
+          </div>
+          <div class="actions">
+            <a href="/edit/<%= contact._id %>"><button class="edit-btn">Edit</button></a>
+            <a href="/delete/<%= contact._id %>"><button class="delete-btn">Delete</button></a>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>
